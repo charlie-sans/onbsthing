@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://bmlpm2lwpcrqu"]
+
+[ext_resource type="PackedScene" uid="uid://cc8ostfvucyj" path="res://desktop_player.tscn" id="1_b708g"]
+[ext_resource type="PackedScene" uid="uid://db7uvjt0smysm" path="res://InGameGUI.tscn" id="2_eb7kn"]
+[ext_resource type="Script" path="res://mainscene/player.gd" id="2_xpkgm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mi0gv"]
+sky_top_color = Color(0.278955, 0.343844, 0.984591, 1)
+sky_horizon_color = Color(0.619739, 0.628211, 0.779398, 1)
+ground_horizon_color = Color(0.619739, 0.628211, 0.779398, 1)
+
+[sub_resource type="Sky" id="Sky_nf2oc"]
+sky_material = SubResource("ProceduralSkyMaterial_mi0gv")
+
+[sub_resource type="Environment" id="Environment_doxtx"]
+background_mode = 2
+sky = SubResource("Sky_nf2oc")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tbtv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f55fe"]
+viewport_path = NodePath("ai thing/SubViewport")
+
+[node name="homescene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_doxtx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(32.175, 0, 0, 0, -0.2475, 0, 0, 0, 32.175, 0, 0, 0)
+use_collision = true
+material = SubResource("ShaderMaterial_2tbtv")
+
+[node name="deskie" parent="." groups=["user"] instance=ExtResource("1_b708g")]
+
+[node name="ai thing" type="Sprite3D" parent="."]
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, -3.55035, 1.872, -1.82896)
+pixel_size = 0.0075
+texture = SubResource("ViewportTexture_f55fe")
+script = ExtResource("2_xpkgm")
+
+[node name="SubViewport" type="SubViewport" parent="ai thing"]
+transparent_bg = true
+size = Vector2i(907, 657)
+
+[node name="InGameGui" parent="ai thing/SubViewport" instance=ExtResource("2_eb7kn")]

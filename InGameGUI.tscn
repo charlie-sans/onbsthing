@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://db7uvjt0smysm"]
+
+[ext_resource type="PackedScene" uid="uid://73jm5qjy52vq" path="res://dialouge/Balloon.tscn" id="1_6dcv6"]
+[ext_resource type="SpriteFrames" uid="uid://bcvftl5htdfc8" path="res://new_sprite_frames.tres" id="2_yy820"]
+
+[node name="InGameGui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExampleBalloon" parent="." instance=ExtResource("1_6dcv6")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1022, 127)
+sprite_frames = ExtResource("2_yy820")
+frame = 3
+frame_progress = 0.0155754
